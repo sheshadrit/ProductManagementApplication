@@ -1,0 +1,35 @@
+@charset "UTF-8";
+.redButton {
+	cursor: pointer;
+	text-align: center;
+	border: 1px solid b31f14;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	border-radius: 5px;
+	color: #fff;
+	text-decoration: none;
+	background-image: -moz-linear-gradient(top, #b3db4f, #6ebb44, #476e3d);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #b3db4f), color-stop(.5, #6ebb44), color-stop(1, #476e3d));
+	background-image: -ms-linear-gradient(top, #b3db4f 0, #6ebb44 50%, #476e3d 100%);
+	-webkit-box-shadow: 1px 2px 4px #333;
+	-moz-box-shadow: 1px 2px 4px #333;
+	box-shadow: 1px 2px 4px #333
+}
+
+.blueButton,
+.redButton {
+	padding: 10px;
+	font-size: 16px;
+	margin: 0 5px
+}
+
+.redButton,
+.sharpRedBar {
+	background: #b31f14;
+	text-shadow: 0 -1px 1px #145072
+}
+
+.redButton:focus {
+	outline: 0;
+	border: none
+}

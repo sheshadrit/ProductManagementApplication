@@ -1,24 +1,26 @@
 package com.pm.response;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.pm.model.Product;
 
 public class Response {
 	
-	ArrayList<Product> productList;
+	List<Product> productList;
 	String status;
 	String errorMessage;
+	Product editableProduct;
 	
 	public Response() {
 		
 	}
 
-	public ArrayList<Product> getProductList() {
+	public List<Product> getProductList() {
 		return productList;
 	}
 
-	public void setProductList(ArrayList<Product> productList) {
+	public void setProductList(List<Product> productList) {
 		this.productList = productList;
 	}
 
@@ -36,6 +38,14 @@ public class Response {
 
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
+	}
+
+	public Product getEditableProduct() {
+		return editableProduct;
+	}
+
+	public void setEditableProduct(Product editableProduct) {
+		this.editableProduct = editableProduct;
 	}
 	
 	

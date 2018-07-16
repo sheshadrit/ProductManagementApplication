@@ -1,6 +1,8 @@
 package com.pm.controller;
 
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Member;
@@ -9,6 +11,8 @@ import java.util.Properties;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.MediaType;
@@ -26,6 +30,7 @@ import com.pm.model.User;
 @Controller
 public class LoginController {
 
+	private static Logger logger = LogManager.getLogger(LoginController.class.getName());
 	@Autowired
 	HttpSession httpSession;
 	
@@ -36,14 +41,14 @@ public class LoginController {
 	
 	@GetMapping("/home")
 	public String home() {
-		return "home";
+		return "testHome";
 	}
 	
 	@PostMapping(value = "/login")
 	public String login(@ModelAttribute("loginForm") User user,Model model) {
+		logger.debug("Indide login method of LoginController");
 		boolean isValidUser = authenticateUser(user.getUserId(),user.getPassword());
-		isValidUser=true;
-		if(isValidUser) {
+		if(!isValidUser) {
 			return "loginError";
 		}
 		model.addAttribute("userId", user.getUserId());
@@ -57,12 +62,17 @@ public class LoginController {
 	}
 	
 	private boolean authenticateUser(String userId,String password) {
+		logger.debug("Indide authenticateUser method of LoginController");
 		boolean isValidUser=false;
 		Properties prop = getLoginProperties();
 		if ((userId.equals(prop.getProperty("user.username1")) || userId.equals(prop.getProperty("user.username2")))
 				&& (password.equals(prop.getProperty("user.password1"))
 						|| password.equals(prop.getProperty("user.password2")))) {
+			logger.debug("User "+userId+" got authenticated");
 			isValidUser = true;
+		}
+		else {
+			logger.debug("User "+userId+" details are not correct");
 		}
 
 		return isValidUser;
@@ -76,7 +86,7 @@ public class LoginController {
 			try {
 				prop.load(inputStream);
 			} catch (IOException e) {
-				System.out.println("Error occured while reading file: "+propFileName);
+				logger.error("Error occured while reading file: "+propFileName);
 			}
 		}
 		return prop;
