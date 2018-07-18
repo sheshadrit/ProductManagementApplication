@@ -1,4 +1,4 @@
-# ProductManagementApplication
+# Product Management Application
 This is a Spring Boot Application
 
 ## Steps to deploy the application. ##
